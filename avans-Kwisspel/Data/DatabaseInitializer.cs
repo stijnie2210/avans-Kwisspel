@@ -22,6 +22,11 @@ namespace avans_Kwisspel.Data
             // Quiz
             Quiz quiz = new Quiz();
 
+            databaseContext.Quizzes.Add(new Quiz()
+            {
+                Text = "Haha"
+            });
+
             databaseContext.Quizzes.Add(quiz);
 
             databaseContext.SaveChanges();

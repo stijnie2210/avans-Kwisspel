@@ -19,11 +19,6 @@ namespace avans_Kwisspel.ViewModel
 
             OpenQuestionOverview = new RelayCommand(openQuestionOverview);
 
-            _databaseContext.Quizzes.Add(new Quiz()
-            {
-                Text = "Haha"
-            });
-
             _databaseContext.SaveChanges();
         }
 

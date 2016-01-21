@@ -22,6 +22,7 @@ namespace avans_Kwisspel.ViewModel
         }
 
         private ObservableCollection<QuestionVM> _questions;
+
         public ObservableCollection<QuestionVM> Questions
         {
             get { return _questions; }
@@ -30,6 +31,18 @@ namespace avans_Kwisspel.ViewModel
                 _questions = value;
                 RaisePropertyChanged(() => Questions);
             }
-        }        
+        }
+
+        private QuestionVM _selectedQuestion;
+
+        public QuestionVM SelectedQuestion
+        {
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
+                RaisePropertyChanged(() => SelectedQuestion);
+            }
+        }
     }
 }

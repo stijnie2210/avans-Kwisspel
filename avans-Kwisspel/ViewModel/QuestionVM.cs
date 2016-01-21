@@ -60,5 +60,10 @@ namespace avans_Kwisspel.ViewModel
                 RaisePropertyChanged(() => Answers);
             }
         }
+
+        public int AmountOfAnswers
+        {
+            get { return Answers.Count; }
+        }
     }
 }
