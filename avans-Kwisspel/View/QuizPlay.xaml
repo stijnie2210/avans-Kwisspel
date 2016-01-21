@@ -1,0 +1,9 @@
+﻿<Window x:Class="avans_Kwisspel.View.QuizPlay"
+        xmlns:src="clr-namespace:avans_Kwisspel.View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="QuizPlay" Height="300" Width="300">
+    <Grid>
+        
+    </Grid>
+</Window>
