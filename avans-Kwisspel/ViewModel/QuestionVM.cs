@@ -37,6 +37,21 @@ namespace avans_Kwisspel.ViewModel
             }
         }
 
+        public int QuizId
+        {
+            get { return _question.QuizId; }
+        }
+
+        public virtual Quiz Quiz
+        {
+            get { return _question.Quiz; }
+            set
+            {
+                _question.Quiz = value;
+                RaisePropertyChanged(() => Quiz);
+            }
+        }
+
         public int CategoryId
         {
             get { return _question.CategoryId; }
@@ -64,6 +79,11 @@ namespace avans_Kwisspel.ViewModel
         public int AmountOfAnswers
         {
             get { return Answers.Count; }
+        }
+
+        public Question toQuestion()
+        {
+            return _question;
         }
     }
 }

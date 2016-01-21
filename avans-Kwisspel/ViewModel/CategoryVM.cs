@@ -46,5 +46,10 @@ namespace avans_Kwisspel.ViewModel
                 RaisePropertyChanged(() => Questions);
             }
         }
+
+        public Category toCategory()
+        {
+            return _category;
+        }
     }
 }

@@ -32,6 +32,16 @@ namespace avans_Kwisspel.ViewModel
             }
         }
 
+        public bool isCorrect
+        {
+            get { return _answer.isCorrect; }
+            set
+            {
+                _answer.isCorrect = value;
+                RaisePropertyChanged(() => isCorrect);
+            }
+        }
+
         public virtual Question Question
         {
             get { return _answer.Question; }
@@ -40,6 +50,11 @@ namespace avans_Kwisspel.ViewModel
                 _answer.Question = value;
                 RaisePropertyChanged(() => Question);
             }
+        }
+
+        public Answer toAnswer()
+        {
+            return _answer;
         }
     }
 }

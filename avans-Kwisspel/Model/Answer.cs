@@ -10,6 +10,8 @@ namespace avans_Kwisspel.Model
         public int Id { get; set; }
         public string Text { get; set; }
 
+        public bool isCorrect { get; set; }
+
         public int QuestionId { get; set; }
         [Required, ForeignKey("QuestionId")]
         public virtual Question Question { get; set; }
