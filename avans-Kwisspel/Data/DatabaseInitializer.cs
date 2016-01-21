@@ -9,13 +9,17 @@ namespace avans_Kwisspel.Data
         {
             // Category
             Category sports = new Category();
-            sports.Text = "Sports";
+            sports.Text = "Sport";
 
             Category it = new Category();
             it.Text = "IT";
 
+            Category rekenen = new Category();
+            rekenen.Text = "Rekenen";
+
             databaseContext.Categories.Add(sports);
             databaseContext.Categories.Add(it);
+            databaseContext.Categories.Add(rekenen);
 
             databaseContext.SaveChanges();
 
@@ -53,6 +57,7 @@ namespace avans_Kwisspel.Data
             Answer c = new Answer();
             c.Text = "Je moeder";
             c.Question = question;
+            c.isCorrect = true;
 
             databaseContext.Answers.Add(a);
             databaseContext.Answers.Add(b);

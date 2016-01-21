@@ -19,6 +19,7 @@ namespace avans_Kwisspel.ViewModel
         public ICommand AddAnswer { get; set; }
         public ICommand AddQuestion { get; set; }
         public ICommand DeleteQuestion { get; set; }
+        public ICommand DeleteAnswer { get; set; }
         public ICommand Clear { get; set; }
 
         public QuestionViewModel()
@@ -28,6 +29,7 @@ namespace avans_Kwisspel.ViewModel
             AddAnswer = new RelayCommand(doAddAnswer);
             AddQuestion = new RelayCommand(doAddQuestion);
             DeleteQuestion = new RelayCommand(doDeleteQuestion);
+            DeleteAnswer = new RelayCommand(doDeleteAnswer);
             Clear = new RelayCommand(doClear);
 
             SelectedCategory = new CategoryVM();
@@ -41,7 +43,10 @@ namespace avans_Kwisspel.ViewModel
 
             Questions = new ObservableCollection<QuestionVM>(questions);
             Categories = new ObservableCollection<CategoryVM>(categories);
+
             Answers = new ObservableCollection<AnswerVM>(answers);
+
+            
         }
 
         private ObservableCollection<QuestionVM> _questions;
@@ -146,9 +151,26 @@ namespace avans_Kwisspel.ViewModel
             }
         }
 
+        private void doDeleteAnswer()
+        {
+            if (SelectedAnswer != null)
+            {
+                var answer = _databaseContext.Answers.Find(SelectedAnswer.Id);
+                if (answer != null)
+                {
+                    _databaseContext.Answers.Attach(answer);
+                    _databaseContext.Answers.Remove(answer);
+                    _databaseContext.SaveChanges();
+                    Answers.Remove(SelectedAnswer);
+                    SelectedAnswer = new AnswerVM();
+                }
+            }
+        }
+
         private void doClear()
         {
             SelectedQuestion = new QuestionVM();
+            SelectedAnswer = new AnswerVM();
         }
         private void doAddAnswer()
         {
@@ -163,10 +185,16 @@ namespace avans_Kwisspel.ViewModel
                 SelectedAnswer = new AnswerVM();
             }
             SelectedAnswer.Question = SelectedQuestion.toQuestion();
-            //SelectedQuestion.Answers.Add(SelectedAnswer.toAnswer());
+            SelectedQuestion.Answers.Add(SelectedAnswer.toAnswer());
             Answers.Add(SelectedAnswer);
             _databaseContext.Answers.Add(SelectedAnswer.toAnswer());
             _databaseContext.SaveChanges();
+        }
+
+        private void Cancel(Window window)
+        {
+            if (window != null)
+                window.Close();
         }
     }
 }
