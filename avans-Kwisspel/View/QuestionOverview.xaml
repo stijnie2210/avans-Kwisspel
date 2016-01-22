@@ -45,7 +45,9 @@
 
         <StackPanel Grid.Row="2">
             <Label Content="{Binding SelectedQuestion.Text}" FontSize="16"/>
-            <ComboBox ItemsSource="{Binding Categories}" DisplayMemberPath="Text" SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox  ItemsSource="{Binding Categories}" DisplayMemberPath="Text" 
+                       SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}" 
+                       SelectedValue="{Binding SelectedCategory.Text, UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">

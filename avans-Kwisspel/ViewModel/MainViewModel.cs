@@ -11,6 +11,7 @@ namespace avans_Kwisspel.ViewModel
     {
         private DatabaseContext _databaseContext;
 
+        public ICommand OpenPlayQuiz { get; set; }
         public ICommand OpenQuestionOverview { get; set; }
         public ICommand OpenQuizOverview { get; set; }
 
@@ -18,10 +19,17 @@ namespace avans_Kwisspel.ViewModel
         {
             _databaseContext = new DatabaseContext();
 
+            OpenPlayQuiz = new RelayCommand(openPlayQuiz);
             OpenQuestionOverview = new RelayCommand(openQuestionOverview);
             OpenQuizOverview = new RelayCommand(openQuizOverview);
 
             _databaseContext.SaveChanges();
+        }
+
+        private void openPlayQuiz()
+        {
+            QuizPlay qp = new QuizPlay();
+            qp.Show();
         }
 
         private void openQuestionOverview()

@@ -195,6 +195,7 @@ namespace avans_Kwisspel.ViewModel
             Answers.Add(SelectedAnswer);
             _databaseContext.Answers.Add(SelectedAnswer.toAnswer());
             _databaseContext.SaveChanges();
+            SelectedAnswer = null;
         }
 
         private void Cancel(Window window)
