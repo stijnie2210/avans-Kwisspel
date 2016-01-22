@@ -93,10 +93,14 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\QuestionVM.cs" />
+    <Compile Include="ViewModel\QuizOverviewViewModel.cs" />
     <Compile Include="ViewModel\QuizVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\QuestionOverview.xaml.cs">
       <DependentUpon>QuestionOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuizOverview.xaml.cs">
+      <DependentUpon>QuizOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuizPlay.xaml.cs">
       <DependentUpon>QuizPlay.xaml</DependentUpon>
@@ -116,6 +120,10 @@
     <Page Include="View\QuestionOverview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuizOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuizPlay.xaml">
       <Generator>MSBuild:Compile</Generator>

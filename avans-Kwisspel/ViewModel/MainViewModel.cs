@@ -12,12 +12,14 @@ namespace avans_Kwisspel.ViewModel
         private DatabaseContext _databaseContext;
 
         public ICommand OpenQuestionOverview { get; set; }
+        public ICommand OpenQuizOverview { get; set; }
 
         public MainViewModel()
         {
             _databaseContext = new DatabaseContext();
 
             OpenQuestionOverview = new RelayCommand(openQuestionOverview);
+            OpenQuizOverview = new RelayCommand(openQuizOverview);
 
             _databaseContext.SaveChanges();
         }
@@ -26,6 +28,12 @@ namespace avans_Kwisspel.ViewModel
         {
             QuestionOverview qov = new QuestionOverview();
             qov.Show();
+        }
+
+        private void openQuizOverview()
+        {
+            QuizOverview qv = new QuizOverview();
+            qv.Show();
         }
 
     }

@@ -11,6 +11,7 @@ namespace avans_Kwisspel.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<QuestionViewModel>();
+            SimpleIoc.Default.Register<QuizOverviewViewModel>();
         }
 
         public MainViewModel Main
@@ -26,6 +27,14 @@ namespace avans_Kwisspel.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<QuestionViewModel>();
+            }
+        }
+
+        public QuizOverviewViewModel Quiz
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<QuizOverviewViewModel>();
             }
         }
         

@@ -7,18 +7,16 @@
         Title="Kwisspel" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"></RowDefinition>
-            <RowDefinition Height="1.0*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.0*"></ColumnDefinition>
-            <ColumnDefinition Width="1.0*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
 
-        <Button Content="Vragen beheer" Grid.Row="1" Grid.Column="0" Width="100" Height="50" VerticalAlignment="Center" Command="{Binding OpenQuestionOverview}"/>
-        <Button Content="Kwis spelen" Grid.Row="1" Grid.Column="1" Width="100" Height="50" VerticalAlignment="Center"/>
-        <Label Content="Kwisspel" Grid.Row="0" VerticalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Margin="197,10,196,22" Grid.ColumnSpan="2"/>
-
+        <Label Content="Kwisspel" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Grid.ColumnSpan="2"/>
+        <Button Content="Vragen beheer" Grid.Row="2" Grid.Column="0" Width="100" Height="50" VerticalAlignment="Center" Command="{Binding OpenQuestionOverview}"/>
+        <Button Content="Kwis spelen" Grid.Row="1" Width="100" Height="50" HorizontalAlignment="Center"/>
+        <Button Content="Kwis beheer" Grid.Row="3" Width="100" Height="50" HorizontalAlignment="Center" Command="{Binding OpenQuizOverview}"/>
 
     </Grid>
 </Window>

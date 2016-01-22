@@ -49,6 +49,7 @@ namespace avans_Kwisspel.ViewModel
             
         }
 
+        #region Observable Collections
         private ObservableCollection<QuestionVM> _questions;
         private ObservableCollection<CategoryVM> _categories;
         private ObservableCollection<AnswerVM> _answers;
@@ -82,6 +83,9 @@ namespace avans_Kwisspel.ViewModel
                 RaisePropertyChanged(() => Answers);
             }
         }
+        #endregion
+
+        #region Selected VMs
 
         private QuestionVM _selectedQuestion;
         private CategoryVM _selectedCategory;
@@ -116,7 +120,9 @@ namespace avans_Kwisspel.ViewModel
                 RaisePropertyChanged(() => SelectedAnswer);
             }
         }
+        #endregion
 
+        #region private voids for ICommands
         private void doAddQuestion()
         {
             if (SelectedQuestion == null)
@@ -196,5 +202,7 @@ namespace avans_Kwisspel.ViewModel
             if (window != null)
                 window.Close();
         }
+
+        #endregion
     }
 }
