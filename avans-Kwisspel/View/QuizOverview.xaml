@@ -27,8 +27,8 @@
             <DataGrid Grid.Row="1" ItemsSource="{Binding Quizzes, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuiz}" IsReadOnly="False" VerticalAlignment="Top" Height="170">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Aantal antwoorden" Binding="{Binding AmountOfQuestions, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Naam" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Aantal vragen" Binding="{Binding AmountOfQuestions, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal">
@@ -40,6 +40,27 @@
                 <Button Content="Verwijderen" Command="{Binding DeleteQuiz}" Height="27" Width="70"/>
                 <Button Content="Clear" Command="{Binding Clear}" Width="70"/>
             </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2">
+            <DataGrid ItemsSource="{Binding SelectedQuiz.Questions, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Aantal antwoorden" Binding="{Binding AmountOfAnswers, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5,0,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Annuleren" Height="27" Width="60" Click="Button_Click"/>
+            <Button Content="Opslaan" Height="27" Width="60"/>
         </StackPanel>
     </Grid>
 </Window>
