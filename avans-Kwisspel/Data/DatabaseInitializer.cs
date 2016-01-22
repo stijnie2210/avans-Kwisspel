@@ -25,10 +25,11 @@ namespace avans_Kwisspel.Data
 
             // Quiz
             Quiz quiz = new Quiz();
+            quiz.Text = "Nog een Coole quiz";
 
             databaseContext.Quizzes.Add(new Quiz()
             {
-                Text = "Haha"
+                Text = "Coole Quiz"
             });
 
             databaseContext.Quizzes.Add(quiz);
@@ -37,9 +38,9 @@ namespace avans_Kwisspel.Data
 
             // Question
             Question question = new Question();
-            question.Text = "Wat gaat er mis?";
+            question.Text = "Wat is 1+1?";
             question.Quiz = quiz;
-            question.Category = it;
+            question.Category = rekenen;
 
             databaseContext.Questions.Add(question);
    
@@ -47,17 +48,17 @@ namespace avans_Kwisspel.Data
 
             // Answer
             Answer a = new Answer();
-            a.Text = "Niks";
+            a.Text = "2";
             a.Question = question;
+            a.isCorrect = true;
 
             Answer b = new Answer();
-            b.Text = "Alles";
+            b.Text = "Huh";
             b.Question = question;
 
             Answer c = new Answer();
-            c.Text = "Je moeder";
+            c.Text = "Cool";
             c.Question = question;
-            c.isCorrect = true;
 
             databaseContext.Answers.Add(a);
             databaseContext.Answers.Add(b);

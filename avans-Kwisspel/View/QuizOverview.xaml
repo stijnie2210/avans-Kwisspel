@@ -46,9 +46,8 @@
             <DataGrid ItemsSource="{Binding SelectedQuiz.Questions, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Aantal antwoorden" Binding="{Binding AmountOfAnswers, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" Width="150"/>
+                    <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -56,7 +55,7 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="5,0,0,0"/>
+                    <Setter Property="Margin" Value="5,0,5,0"/>
                 </Style>
             </StackPanel.Resources>
             <Button Content="Annuleren" Height="27" Width="60" Click="Button_Click"/>

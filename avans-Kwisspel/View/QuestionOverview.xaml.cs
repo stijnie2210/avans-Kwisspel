@@ -21,6 +21,7 @@ namespace avans_Kwisspel.View
     {
         public QuestionOverview()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 

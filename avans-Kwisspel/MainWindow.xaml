@@ -5,6 +5,11 @@
         xmlns:local="clr-namespace:avans_Kwisspel.ViewModel"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="Kwisspel" Height="350" Width="525">
+    
+    <Window.Background>
+        <ImageBrush ImageSource="Img/background-dark.jpg"/>
+    </Window.Background>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"></RowDefinition>
@@ -13,7 +18,7 @@
             <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Content="Kwisspel" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Grid.ColumnSpan="2"/>
+        <Label Content="Kwisspel" Foreground="CadetBlue" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Grid.ColumnSpan="2"/>
         <Button Content="Vragen beheer" Grid.Row="2" Grid.Column="0" Width="100" Height="50" VerticalAlignment="Center" Command="{Binding OpenQuestionOverview}"/>
         <Button Content="Kwis spelen" Grid.Row="1" Width="100" Height="50" HorizontalAlignment="Center"/>
         <Button Content="Kwis beheer" Grid.Row="3" Width="100" Height="50" HorizontalAlignment="Center" Command="{Binding OpenQuizOverview}"/>

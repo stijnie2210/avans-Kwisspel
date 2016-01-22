@@ -24,6 +24,7 @@ namespace avans_Kwisspel
 
         public MainWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
