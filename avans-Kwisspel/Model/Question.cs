@@ -12,7 +12,7 @@ namespace avans_Kwisspel.Model
         public string Text { get; set; }
 
         public int QuizId { get; set; }
-        [Required, ForeignKey("QuizId")]
+        [ForeignKey("QuizId")]
         public virtual Quiz Quiz { get; set; }
 
         public int CategoryId { get; set; }

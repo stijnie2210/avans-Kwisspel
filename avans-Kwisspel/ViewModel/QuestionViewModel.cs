@@ -129,15 +129,29 @@ namespace avans_Kwisspel.ViewModel
             {
                 SelectedQuestion = new QuestionVM();
             }
-            SelectedQuestion.Quiz = _databaseContext.Quizzes.FirstOrDefault();
-            SelectedQuestion.Category = SelectedCategory.toCategory();
+
+            if (SelectedCategory.Text != null)
+            {
+                SelectedQuestion.Category = SelectedCategory.toCategory();
+            }
+
+            if (SelectedQuestion.Text == null)
+            {
+                MessageBox.Show("Er is geen naam gegeven aan de vraag, vul de naam voor een nieuwe vraag in.", "Waarschuwing");
+                return;
+            }
 
             var question = _databaseContext.Questions.Find(SelectedQuestion.Id);
+
             if (question == null)
             {
                 Questions.Add(SelectedQuestion);
                 _databaseContext.Questions.Add(SelectedQuestion.toQuestion());
                 _databaseContext.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Vraag bestaat al, druk op clear en vul dan de naam voor een nieuwe vraag in.", "Waarschuwing");
             }
         }
 
