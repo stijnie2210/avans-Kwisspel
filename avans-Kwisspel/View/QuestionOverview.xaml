@@ -58,7 +58,7 @@
                 <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddAnswer}"></Button>
             </StackPanel>
 
-            <DataGrid Grid.Row="2" ItemsSource="{Binding SelectedQuestion.Answers, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAnswer, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True">
+            <DataGrid Grid.Row="2" ItemsSource="{Binding Answers}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAnswer, Mode=TwoWay}" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Antwoord" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="*" IsReadOnly="True"/>

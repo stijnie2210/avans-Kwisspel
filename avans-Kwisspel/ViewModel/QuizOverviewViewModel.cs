@@ -34,7 +34,6 @@ namespace avans_Kwisspel.ViewModel
             IEnumerable<QuestionVM> questions = _dataContext.Questions.ToList().Select(q => new QuestionVM(q));
 
             Quizzes = new ObservableCollection<QuizVM>(quizzes);
-            Questions = new ObservableCollection<QuestionVM>(questions);
 
         }
 
@@ -71,6 +70,7 @@ namespace avans_Kwisspel.ViewModel
             {
                 _selectedQuiz = value;
                 RaisePropertyChanged(() => SelectedQuiz);
+                LoadQuestions();
             }
         }
 
@@ -98,6 +98,12 @@ namespace avans_Kwisspel.ViewModel
         {
             SelectedQuiz = new QuizVM();
             SelectedQuestion = new QuestionVM();
+        }
+
+        private void LoadQuestions()
+        {
+            Questions = new ObservableCollection<QuestionVM>(SelectedQuiz.Questions.ToList().Select(questions => new QuestionVM(questions)));
+            SelectedQuestion = Questions.FirstOrDefault();
         }
     }
 }

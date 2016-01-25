@@ -44,8 +44,6 @@ namespace avans_Kwisspel.ViewModel
             Questions = new ObservableCollection<QuestionVM>(questions);
             Categories = new ObservableCollection<CategoryVM>(categories);
 
-            Answers = new ObservableCollection<AnswerVM>(answers);
-
             
         }
 
@@ -98,6 +96,7 @@ namespace avans_Kwisspel.ViewModel
             {
                 _selectedQuestion = value;
                 RaisePropertyChanged(() => SelectedQuestion);
+                LoadAnswers();
             }
         }
 
@@ -178,7 +177,6 @@ namespace avans_Kwisspel.ViewModel
                 var answer = _databaseContext.Answers.Find(SelectedAnswer.Id);
                 if (answer != null)
                 {
-                    _databaseContext.Answers.Attach(answer);
                     _databaseContext.Answers.Remove(answer);
                     _databaseContext.SaveChanges();
                     Answers.Remove(SelectedAnswer);
@@ -216,6 +214,12 @@ namespace avans_Kwisspel.ViewModel
         {
             if (window != null)
                 window.Close();
+        }
+
+        private void LoadAnswers()
+        {
+            Answers = new ObservableCollection<AnswerVM>(SelectedQuestion.Answers.ToList().Select(answer => new AnswerVM(answer)));
+            SelectedAnswer = Answers.FirstOrDefault(); 
         }
 
         #endregion

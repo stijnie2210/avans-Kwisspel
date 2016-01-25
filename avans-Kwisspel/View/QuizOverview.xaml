@@ -24,7 +24,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <DataGrid Grid.Row="1" ItemsSource="{Binding Quizzes, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuiz}" IsReadOnly="False" VerticalAlignment="Top" Height="170">
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Quizzes}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuiz}" IsReadOnly="False" VerticalAlignment="Top" Height="170">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Naam" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
@@ -43,11 +43,11 @@
         </StackPanel>
         
         <StackPanel Grid.Row="2">
-            <DataGrid ItemsSource="{Binding SelectedQuiz.Questions, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion}">
+            <DataGrid ItemsSource="{Binding Questions}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" Width="150"/>
-                    <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, Mode=TwoWay}" IsReadOnly="True" Width="150"/>
+                    <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text}" IsReadOnly="True" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
