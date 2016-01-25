@@ -41,9 +41,16 @@
                 <Button Content="Clear" Command="{Binding Clear}" Width="70"/>
             </StackPanel>
         </StackPanel>
-        
+
         <StackPanel Grid.Row="2">
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Label Content="Kies een vraag om aan de kwis toe te voegen:"/>
+                <ComboBox ItemsSource="{Binding Questions}" DisplayMemberPath="Text" 
+                       SelectedItem="{Binding SelectedQuestion, UpdateSourceTrigger=PropertyChanged}" Width="272"/>
+            </StackPanel>
+            
             <DataGrid ItemsSource="{Binding Questions}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}">
+                <!-- TODO: aparte observablecollection maken voor combobox, zodat er uit alle vragen geselecteerd kan worden.-->
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Vraag" Binding="{Binding Text, Mode=TwoWay}" IsReadOnly="True" Width="150"/>

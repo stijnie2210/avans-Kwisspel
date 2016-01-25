@@ -45,8 +45,11 @@
 
         <StackPanel Grid.Row="2">
             <Label Content="{Binding SelectedQuestion.Text}" FontSize="16"/>
-            <ComboBox  ItemsSource="{Binding Categories}" DisplayMemberPath="Text" 
-                       SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Verander de categorie:"/>
+                <ComboBox  ItemsSource="{Binding Categories}" DisplayMemberPath="Text" 
+                       SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}" Width="272"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
@@ -54,15 +57,15 @@
                     </Style>
                 </StackPanel.Resources>
                 <Label Content="Nieuw Antwoord:" VerticalAlignment="Center"/>
-                <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedAnswer.Text, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
+                <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedAnswer.Text}" Width="300"/>
                 <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddAnswer}"></Button>
             </StackPanel>
 
             <DataGrid Grid.Row="2" ItemsSource="{Binding Answers}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAnswer, Mode=TwoWay}" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Antwoord" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="*" IsReadOnly="True"/>
-                    <DataGridCheckBoxColumn Header="Is Correct" Binding="{Binding isCorrect, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Antwoord" Binding="{Binding Text}" Width="*" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="Is Correct" Binding="{Binding isCorrect}" IsReadOnly="False"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -83,7 +86,7 @@
                 </Style>
             </StackPanel.Resources>
             <Button Content="Annuleren" Height="27" Width="60" Click="Button_Click"/>
-            <Button Content="Opslaan" Height="27" Width="60"/>
+            <Button Content="Opslaan" Height="27" Width="60" Command="{Binding SaveCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

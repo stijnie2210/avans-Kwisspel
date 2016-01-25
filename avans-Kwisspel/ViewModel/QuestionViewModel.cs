@@ -21,6 +21,7 @@ namespace avans_Kwisspel.ViewModel
         public ICommand DeleteQuestion { get; set; }
         public ICommand DeleteAnswer { get; set; }
         public ICommand Clear { get; set; }
+        public ICommand SaveCommand { get; set; }
 
         public QuestionViewModel()
         {
@@ -31,6 +32,7 @@ namespace avans_Kwisspel.ViewModel
             DeleteQuestion = new RelayCommand(doDeleteQuestion);
             DeleteAnswer = new RelayCommand(doDeleteAnswer);
             Clear = new RelayCommand(doClear);
+            SaveCommand = new RelayCommand(doSave);
 
             SelectedCategory = new CategoryVM();
             SelectedQuestion = new QuestionVM();
@@ -97,6 +99,7 @@ namespace avans_Kwisspel.ViewModel
                 _selectedQuestion = value;
                 RaisePropertyChanged(() => SelectedQuestion);
                 LoadAnswers();
+                
             }
         }
 
@@ -136,7 +139,7 @@ namespace avans_Kwisspel.ViewModel
 
             if (SelectedQuestion.Text == null)
             {
-                MessageBox.Show("Er is geen naam gegeven aan de vraag, vul de naam voor een nieuwe vraag in.", "Waarschuwing");
+                MessageBox.Show("Er is geen naam gegeven aan de vraag, vul de naam voor een nieuwe vraag in.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -144,13 +147,14 @@ namespace avans_Kwisspel.ViewModel
 
             if (question == null)
             {
+                SelectedQuestion.Quiz = _databaseContext.Quizzes.FirstOrDefault();
                 Questions.Add(SelectedQuestion);
                 _databaseContext.Questions.Add(SelectedQuestion.toQuestion());
                 _databaseContext.SaveChanges();
             }
             else
             {
-                MessageBox.Show("Vraag bestaat al, druk op clear en vul dan de naam voor een nieuwe vraag in.", "Waarschuwing");
+                MessageBox.Show("Vraag bestaat al, druk op clear en vul dan de naam voor een nieuwe vraag in, of druk op opslaan als u de gegevens wilt opslaan.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -179,6 +183,7 @@ namespace avans_Kwisspel.ViewModel
                 {
                     _databaseContext.Answers.Remove(answer);
                     _databaseContext.SaveChanges();
+
                     Answers.Remove(SelectedAnswer);
                     SelectedAnswer = new AnswerVM();
                 }
@@ -218,8 +223,32 @@ namespace avans_Kwisspel.ViewModel
 
         private void LoadAnswers()
         {
-            Answers = new ObservableCollection<AnswerVM>(SelectedQuestion.Answers.ToList().Select(answer => new AnswerVM(answer)));
-            SelectedAnswer = Answers.FirstOrDefault(); 
+            if (SelectedQuestion != null)
+            {
+                Answers = new ObservableCollection<AnswerVM>(SelectedQuestion.Answers.ToList().Select(answer => new AnswerVM(answer)));
+                SelectedAnswer = Answers.FirstOrDefault();
+                SelectedAnswer = new AnswerVM();
+            }
+        }
+
+        private void doSave()
+        {
+            foreach (QuestionVM selectedItem in Questions)
+            {
+                var item = _databaseContext.Questions.Find(selectedItem.Id);
+                if (item == null)
+                {
+                    _databaseContext.Questions.Add(selectedItem.toQuestion());
+                    _databaseContext.SaveChanges();
+                }
+                else
+                {
+                    _databaseContext.Entry(item).CurrentValues.SetValues(selectedItem);
+                    _databaseContext.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                    _databaseContext.SaveChanges();
+                }
+            }
+            MessageBox.Show("De gegevens zijn opgeslagen!", "Succes!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         #endregion
