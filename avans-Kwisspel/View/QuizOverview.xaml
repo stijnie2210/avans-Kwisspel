@@ -24,11 +24,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <DataGrid Grid.Row="1" ItemsSource="{Binding Quizzes}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuiz}" IsReadOnly="False" VerticalAlignment="Top" Height="170">
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Quizzes, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuiz}" IsReadOnly="False" VerticalAlignment="Top" Height="170">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Naam" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Aantal vragen" Binding="{Binding AmountOfQuestions, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Aantal vragen" Binding="{Binding AmountOfQuestions}" Width="*" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal">
@@ -42,21 +42,23 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
-            <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <Label Content="Kies een vraag om aan de kwis toe te voegen:"/>
-                <ComboBox ItemsSource="{Binding Questions}" DisplayMemberPath="Text" 
-                       SelectedItem="{Binding SelectedQuestion, UpdateSourceTrigger=PropertyChanged}" Width="272"/>
-            </StackPanel>
-            
-            <DataGrid ItemsSource="{Binding Questions}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}">
-                <!-- TODO: aparte observablecollection maken voor combobox, zodat er uit alle vragen geselecteerd kan worden.-->
+        <StackPanel Grid.Row="2">          
+            <DataGrid ItemsSource="{Binding Questions, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, Mode=TwoWay}" IsReadOnly="True" Width="150"/>
+                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, Mode=TwoWay}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text}" IsReadOnly="True" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5,0,5,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Verwijderen" Height="27" Width="70" Command="{Binding DeleteQuestion}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -66,7 +68,7 @@
                 </Style>
             </StackPanel.Resources>
             <Button Content="Annuleren" Height="27" Width="60" Click="Button_Click"/>
-            <Button Content="Opslaan" Height="27" Width="60"/>
+            <Button Content="Opslaan" Height="27" Width="60" Command="{Binding SaveCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

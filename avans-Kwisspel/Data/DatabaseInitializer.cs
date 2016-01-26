@@ -17,9 +17,13 @@ namespace avans_Kwisspel.Data
             Category rekenen = new Category();
             rekenen.Text = "Rekenen";
 
+            Category aardrijkskunde = new Category();
+            aardrijkskunde.Text = "Aardrijkskunde";
+
             databaseContext.Categories.Add(sports);
             databaseContext.Categories.Add(it);
             databaseContext.Categories.Add(rekenen);
+            databaseContext.Categories.Add(aardrijkskunde);
 
             databaseContext.SaveChanges();
 

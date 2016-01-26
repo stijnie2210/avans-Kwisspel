@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         DataContext="{Binding Question, Source={StaticResource Locator}}"
-        Title="Vragen beheren" Height="600" Width="600">
+        Title="Vragen beheren" Height="650" Width="650">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -29,6 +29,7 @@
                 <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Vraag" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Quiz" Binding="{Binding Quiz.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Aantal antwoorden" Binding="{Binding AmountOfAnswers, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -45,6 +46,13 @@
 
         <StackPanel Grid.Row="2">
             <Label Content="{Binding SelectedQuestion.Text}" FontSize="16"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Voeg de vraag toe aan een quiz:"/>
+                <ComboBox Width="221" ItemsSource="{Binding Quizzes}" DisplayMemberPath="Text" 
+                          SelectedItem="{Binding SelectedQuiz, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal">
                 <Label Content="Verander de categorie:"/>
                 <ComboBox  ItemsSource="{Binding Categories}" DisplayMemberPath="Text" 

@@ -51,5 +51,10 @@ namespace avans_Kwisspel.ViewModel
         {
             get { return Questions.Count; }
         }
+
+        public Quiz toQuiz()
+        {
+            return _quiz;
+        }
     }
 }

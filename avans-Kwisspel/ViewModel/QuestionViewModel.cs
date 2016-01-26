@@ -42,9 +42,11 @@ namespace avans_Kwisspel.ViewModel
             IEnumerable<QuestionVM> questions = _databaseContext.Questions.ToList().Select(question => new QuestionVM(question));
             IEnumerable<CategoryVM> categories = _databaseContext.Categories.ToList().Select(category => new CategoryVM(category));
             IEnumerable<AnswerVM> answers = _databaseContext.Answers.ToList().Select(answer => new AnswerVM(answer));
+            IEnumerable<QuizVM> quizzes = _databaseContext.Quizzes.ToList().Select(quiz => new QuizVM(quiz));
 
             Questions = new ObservableCollection<QuestionVM>(questions);
             Categories = new ObservableCollection<CategoryVM>(categories);
+            Quizzes = new ObservableCollection<QuizVM>(quizzes);
 
             
         }
@@ -53,6 +55,7 @@ namespace avans_Kwisspel.ViewModel
         private ObservableCollection<QuestionVM> _questions;
         private ObservableCollection<CategoryVM> _categories;
         private ObservableCollection<AnswerVM> _answers;
+        private ObservableCollection<QuizVM> _quizzes;
 
         public ObservableCollection<QuestionVM> Questions
         {
@@ -83,6 +86,16 @@ namespace avans_Kwisspel.ViewModel
                 RaisePropertyChanged(() => Answers);
             }
         }
+
+        public ObservableCollection<QuizVM> Quizzes
+        {
+            get { return _quizzes; }
+            set
+            {
+                _quizzes = value;
+                RaisePropertyChanged(() => Quizzes);
+            }
+        }
         #endregion
 
         #region Selected VMs
@@ -90,6 +103,7 @@ namespace avans_Kwisspel.ViewModel
         private QuestionVM _selectedQuestion;
         private CategoryVM _selectedCategory;
         private AnswerVM _selectedAnswer;
+        private QuizVM _selectedQuiz;
 
         public QuestionVM SelectedQuestion
         {
@@ -98,6 +112,8 @@ namespace avans_Kwisspel.ViewModel
             {
                 _selectedQuestion = value;
                 RaisePropertyChanged(() => SelectedQuestion);
+                SelectedCategory = null;
+                SelectedQuiz = null;
                 LoadAnswers();
                 
             }
@@ -122,19 +138,37 @@ namespace avans_Kwisspel.ViewModel
                 RaisePropertyChanged(() => SelectedAnswer);
             }
         }
+
+        public QuizVM SelectedQuiz
+        {
+            get { return _selectedQuiz; }
+            set
+            {
+                _selectedQuiz = value;
+                RaisePropertyChanged(() => SelectedQuiz);
+            }
+        }
         #endregion
 
         #region private voids for ICommands
         private void doAddQuestion()
         {
-            if (SelectedQuestion == null)
+            if (SelectedQuestion == null || SelectedCategory == null || SelectedQuiz == null)
             {
                 SelectedQuestion = new QuestionVM();
+                SelectedCategory = new CategoryVM();
+                SelectedQuiz = new QuizVM();
             }
 
-            if (SelectedCategory.Text != null)
+            if (SelectedCategory.Text != null && SelectedQuiz.Text != null)
             {
                 SelectedQuestion.Category = SelectedCategory.toCategory();
+                SelectedQuestion.Quiz = SelectedQuiz.toQuiz();
+            }
+            else
+            {
+                MessageBox.Show("Selecteer voor de vraag zowel een categorie als een kwis", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
 
             if (SelectedQuestion.Text == null)
@@ -147,7 +181,6 @@ namespace avans_Kwisspel.ViewModel
 
             if (question == null)
             {
-                SelectedQuestion.Quiz = _databaseContext.Quizzes.FirstOrDefault();
                 Questions.Add(SelectedQuestion);
                 _databaseContext.Questions.Add(SelectedQuestion.toQuestion());
                 _databaseContext.SaveChanges();
@@ -194,10 +227,18 @@ namespace avans_Kwisspel.ViewModel
         {
             SelectedQuestion = new QuestionVM();
             SelectedAnswer = new AnswerVM();
+            SelectedCategory = null;
+            SelectedQuiz = null;
         }
         private void doAddAnswer()
         {
             var question = _databaseContext.Questions.Find(SelectedQuestion.Id);
+
+            if (question.Answers.Count == 4)
+            {
+                MessageBox.Show("Aan een vraag kunnen niet meer dan vier antwoorden worden gegeven.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
 
             if (question == null)
             {
@@ -243,6 +284,15 @@ namespace avans_Kwisspel.ViewModel
                 }
                 else
                 {
+                    if (SelectedCategory != null)
+                    {
+                        SelectedQuestion.Category = SelectedCategory.toCategory();
+                    }
+
+                    if (SelectedQuiz != null)
+                    {
+                        SelectedQuestion.Quiz = SelectedQuiz.toQuiz();
+                    }
                     _databaseContext.Entry(item).CurrentValues.SetValues(selectedItem);
                     _databaseContext.Entry(item).State = System.Data.Entity.EntityState.Modified;
                     _databaseContext.SaveChanges();
