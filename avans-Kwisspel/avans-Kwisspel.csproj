@@ -94,6 +94,7 @@
     <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\QuestionVM.cs" />
     <Compile Include="ViewModel\QuizOverviewViewModel.cs" />
+    <Compile Include="ViewModel\QuizPlayViewModel.cs" />
     <Compile Include="ViewModel\QuizVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\QuestionOverview.xaml.cs">
