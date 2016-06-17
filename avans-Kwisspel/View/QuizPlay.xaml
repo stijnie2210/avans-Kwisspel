@@ -13,12 +13,13 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="Selecteer een kwis om te spelen:" FontSize="12" VerticalAlignment="Center"/>
-            <Button Content="Selecteer kwis" Width="100" Height="40"/>
+            <ComboBox Width="150" Height="30" ItemsSource="{Binding Quizzes, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Text" 
+                          SelectedItem="{Binding SelectedQuiz, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Grid.Row="1" Content="Vraag:"/>
+                <Label Grid.Row="1" Content="{Binding SelectedQuestion.Text, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">
@@ -27,8 +28,8 @@
                         <Setter Property="Margin" Value="60,5,10,10"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="Vraag 1" Width="150" Height="150" Background="DarkBlue" Foreground="White"/>
-                <Button Content="Vraag 2" Width="150" Height="150" Background="DarkGreen" Foreground="White"/>
+                <Button Content="{Binding SelectedQuestion.Answers[0].Text}" Width="150" Height="150" Background="DarkBlue" Foreground="White"/>
+                <Button Content="{Binding SelectedQuestion.Answers[1].Text}" Width="150" Height="150" Background="DarkGreen" Foreground="White"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">
@@ -37,8 +38,8 @@
                         <Setter Property="Margin" Value="60,0,10,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="Vraag 3" Width="150" Height="150" Background="DarkRed" Foreground="White"/>
-                <Button Content="Vraag 4" Width="150" Height="150" Background="DarkGoldenrod" Foreground="White"/>
+                <Button Content="{Binding SelectedQuestion.Answers[2].Text}" Width="150" Height="150" Background="DarkRed" Foreground="White"/>
+                <Button Content="{Binding SelectedQuestion.Answers[3].Text}" Width="150" Height="150" Background="DarkGoldenrod" Foreground="White"/>
             </StackPanel>
         </StackPanel>
     </Grid>

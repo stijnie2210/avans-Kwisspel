@@ -39,7 +39,7 @@ namespace avans_Kwisspel.ViewModel
             }
         }
 
-        public QuizPlayViewModel Quizplay
+        public QuizPlayViewModel QuizPlay
         {
             get
             {

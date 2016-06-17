@@ -20,7 +20,7 @@
             </StackPanel.Resources>
             <Label Content="Nieuwe Vraag:" VerticalAlignment="Center"/>
             <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedQuestion.Text, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
-            <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddQuestion}"></Button>
+            <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddQuestion}" Background="MediumSeaGreen" Foreground="white"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
@@ -39,7 +39,7 @@
                         <Setter Property="Margin" Value="5,5,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="Verwijderen" Command="{Binding DeleteQuestion}" Height="27" Width="70"/>
+                <Button Content="Verwijderen" Command="{Binding DeleteQuestion}" Height="27" Width="70" Background="IndianRed" Foreground="White"/>
                 <Button Content="Clear" Command="{Binding Clear}" Width="70"/>
             </StackPanel>
         </StackPanel>
@@ -66,7 +66,7 @@
                 </StackPanel.Resources>
                 <Label Content="Nieuw Antwoord:" VerticalAlignment="Center"/>
                 <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedAnswer.Text}" Width="300"/>
-                <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddAnswer}"></Button>
+                <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddAnswer}" Background="MediumSeaGreen" Foreground="white"/>
             </StackPanel>
 
             <DataGrid Grid.Row="2" ItemsSource="{Binding Answers}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAnswer, Mode=TwoWay}" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True">
@@ -84,7 +84,7 @@
                     <Setter Property="Margin" Value="5,5,0,0"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Verwijderen" Command="{Binding DeleteAnswer}" Height="27" Width="70"/>
+            <Button Content="Verwijderen" Command="{Binding DeleteAnswer}" Height="27" Width="70" Background="IndianRed" Foreground="white"/>
         </StackPanel>
         
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">

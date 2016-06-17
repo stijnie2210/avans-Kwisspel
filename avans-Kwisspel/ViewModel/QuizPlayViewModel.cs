@@ -1,11 +1,13 @@
 ﻿using avans_Kwisspel.Data;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace avans_Kwisspel.ViewModel
 {
@@ -14,19 +16,32 @@ namespace avans_Kwisspel.ViewModel
 
         private DatabaseContext _databaseContext;
 
+        public ICommand GiveAnswerCommand;
+
         public QuizPlayViewModel()
         {
             _databaseContext = new DatabaseContext();
 
             SelectedQuestion = new QuestionVM();
+            SelectedQuiz = new QuizVM();
 
             IEnumerable<QuestionVM> questions = _databaseContext.Questions.ToList().Select(q => new QuestionVM(q));
+            IEnumerable<QuizVM> quizzes = _databaseContext.Quizzes.ToList().Select(qz => new QuizVM(qz));
             IEnumerable<AnswerVM> answers = _databaseContext.Answers.ToList().Select(a => new AnswerVM(a));
 
             Questions = new ObservableCollection<QuestionVM>(questions);
+            Quizzes = new ObservableCollection<QuizVM>(quizzes);
+
+            GiveAnswerCommand = new RelayCommand(GiveAnswer);
+        }
+
+        private void GiveAnswer()
+        {
+            // hehe
         }
 
         private ObservableCollection<QuestionVM> _questions;
+        private ObservableCollection<QuizVM> _quizzes;
         private ObservableCollection<AnswerVM> _answers;
 
         public ObservableCollection<QuestionVM> Questions
@@ -36,6 +51,16 @@ namespace avans_Kwisspel.ViewModel
             {
                 _questions = value;
                 RaisePropertyChanged(() => Questions);
+            }
+        }
+
+        public ObservableCollection<QuizVM> Quizzes
+        {
+            get { return _quizzes; }
+            set
+            {
+                _quizzes = value;
+                RaisePropertyChanged(() => Quizzes);
             }
         }
 
@@ -50,6 +75,7 @@ namespace avans_Kwisspel.ViewModel
         }
 
         private QuestionVM _selectedQuestion;
+        private QuizVM _selectedQuiz;
         private AnswerVM _selectedAnswer;
 
         public QuestionVM SelectedQuestion
@@ -59,7 +85,26 @@ namespace avans_Kwisspel.ViewModel
             {
                 _selectedQuestion = value;
                 RaisePropertyChanged(() => SelectedQuestion);
+
                 loadAnswers();
+            }
+        }
+
+        private void LoadQuestions()
+        {
+            Questions = new ObservableCollection<QuestionVM>(SelectedQuiz.Questions.ToList().Select(question => new QuestionVM(question)));
+            SelectedQuestion = Questions.FirstOrDefault();
+        }
+
+        public QuizVM SelectedQuiz
+        {
+            get { return _selectedQuiz; }
+            set
+            {
+                _selectedQuiz = value;
+                RaisePropertyChanged(() => SelectedQuiz);
+
+                LoadQuestions();
             }
         }
 
@@ -79,7 +124,6 @@ namespace avans_Kwisspel.ViewModel
             {
                 Answers = new ObservableCollection<AnswerVM>(SelectedQuestion.Answers.ToList().Select(answer => new AnswerVM(answer)));
                 SelectedAnswer = Answers.FirstOrDefault();
-                SelectedAnswer = new AnswerVM();
             }
         }
     }

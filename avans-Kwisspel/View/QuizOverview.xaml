@@ -20,7 +20,7 @@
             </StackPanel.Resources>
             <Label Content="Nieuwe Quiz:" VerticalAlignment="Center"/>
             <TextBox Height="23" TextWrapping="Wrap" Text="{Binding SelectedQuiz.Text, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
-            <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddQuiz}"></Button>
+            <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddQuiz}" Background="MediumSeaGreen" Foreground="white"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
@@ -37,7 +37,7 @@
                         <Setter Property="Margin" Value="5,5,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="Verwijderen" Command="{Binding DeleteQuiz}" Height="27" Width="70"/>
+                <Button Content="Verwijderen" Command="{Binding DeleteQuiz}" Height="27" Width="70" Background="IndianRed" Foreground="white"/>
                 <Button Content="Clear" Command="{Binding Clear}" Width="70"/>
             </StackPanel>
         </StackPanel>
@@ -58,7 +58,7 @@
                     <Setter Property="Margin" Value="5,0,5,0"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Verwijderen" Height="27" Width="70" Command="{Binding DeleteQuestion}"/>
+            <Button Content="Verwijderen" Height="27" Width="70" Command="{Binding DeleteQuestion}" Background="IndianRed" Foreground="white"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
