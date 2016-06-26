@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         DataContext="{Binding Question, Source={StaticResource Locator}}"
         Title="Vragen beheren" Height="650" Width="650">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
@@ -24,15 +24,15 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Questions, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion}" IsReadOnly="False" VerticalAlignment="Top" Height="170">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Vraag" Binding="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True"/>
+            <DataGrid SelectionMode="Single" ItemsSource="{Binding Questions, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedQuestion}" IsReadOnly="False" VerticalAlignment="Top" Height="170">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Vraag" Binding="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Categorie" Binding="{Binding Category.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Quiz" Binding="{Binding Quiz.Text, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Aantal antwoorden" Binding="{Binding AmountOfAnswers, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                </DataGrid.Columns>
+            </DataGrid>
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
@@ -46,13 +46,13 @@
 
         <StackPanel Grid.Row="2">
             <Label Content="{Binding SelectedQuestion.Text}" FontSize="16"/>
-            
+
             <StackPanel Orientation="Horizontal">
                 <Label Content="Voeg de vraag toe aan een quiz:"/>
                 <ComboBox Width="221" ItemsSource="{Binding Quizzes}" DisplayMemberPath="Text" 
                           SelectedItem="{Binding SelectedQuiz, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal">
                 <Label Content="Verander de categorie:"/>
                 <ComboBox  ItemsSource="{Binding Categories}" DisplayMemberPath="Text" 
@@ -69,7 +69,7 @@
                 <Button Content="Toevoegen" Width="100" VerticalAlignment="Center" Height="25" Command="{Binding AddAnswer}" Background="MediumSeaGreen" Foreground="white"/>
             </StackPanel>
 
-            <DataGrid Grid.Row="2" ItemsSource="{Binding Answers}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAnswer, Mode=TwoWay}" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True">
+            <DataGrid SelectionMode="Single" Grid.Row="2" ItemsSource="{Binding Answers}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAnswer, Mode=TwoWay}" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Antwoord" Binding="{Binding Text}" Width="*" IsReadOnly="True"/>
@@ -77,7 +77,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        
+
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
@@ -86,7 +86,7 @@
             </StackPanel.Resources>
             <Button Content="Verwijderen" Command="{Binding DeleteAnswer}" Height="27" Width="70" Background="IndianRed" Foreground="white"/>
         </StackPanel>
-        
+
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">

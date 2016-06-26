@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace avans_Kwisspel.ViewModel
@@ -16,7 +17,8 @@ namespace avans_Kwisspel.ViewModel
 
         private DatabaseContext _databaseContext;
 
-        public ICommand GiveAnswerCommand;
+        private int correctQuestions = 0;
+        public ICommand GiveAnswerCommand { get; set; }
 
         public QuizPlayViewModel()
         {
@@ -37,7 +39,42 @@ namespace avans_Kwisspel.ViewModel
 
         private void GiveAnswer()
         {
-            // hehe
+            if (SelectedAnswer != null)
+            {
+                if (SelectedAnswer.isCorrect) correctQuestions++;                
+
+                QuestionVM nextQuestion = null;
+                foreach(QuestionVM question in Questions)
+                {
+                    if (question.Id <= SelectedQuestion.Id) continue;
+
+                    if (nextQuestion == null)
+                    {
+                        nextQuestion = question;
+                        continue;
+                    }
+
+                    if (nextQuestion.Id > question.Id)
+                    {
+                        nextQuestion = question;
+                    }
+                }
+
+                if (nextQuestion == null)
+                {
+                    MessageBox.Show("De kwis is afgelopen. Je hebt " + correctQuestions + " van de " +  Questions.Count + " vraag/vragen goed beantwoord!", "Klaar!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SelectedQuestion = null;
+                    SelectedAnswer = null;
+                    Answers = null;
+                    Questions = null;
+                    SelectedQuiz = null;
+                    correctQuestions = 0;
+                    return;
+                }
+
+                SelectedQuestion = nextQuestion;
+                RaisePropertyChanged(() => SelectedQuestion);
+            }
         }
 
         private ObservableCollection<QuestionVM> _questions;
@@ -86,7 +123,10 @@ namespace avans_Kwisspel.ViewModel
                 _selectedQuestion = value;
                 RaisePropertyChanged(() => SelectedQuestion);
 
-                loadAnswers();
+                if (SelectedQuestion != null)
+                {
+                    loadAnswers();
+                } 
             }
         }
 
@@ -101,10 +141,14 @@ namespace avans_Kwisspel.ViewModel
             get { return _selectedQuiz; }
             set
             {
+                correctQuestions = 0;
                 _selectedQuiz = value;
                 RaisePropertyChanged(() => SelectedQuiz);
 
-                LoadQuestions();
+                if (SelectedQuiz != null)
+                {
+                    LoadQuestions();
+                }
             }
         }
 
