@@ -230,6 +230,13 @@ namespace avans_Kwisspel.ViewModel
             SelectedCategory = null;
             SelectedQuiz = null;
         }
+
+        private void answerClear()
+        {
+            SelectedAnswer = new AnswerVM();
+            SelectedCategory = null;
+            SelectedQuiz = null;
+        }
         private void doAddAnswer()
         {
             var question = _databaseContext.Questions.Find(SelectedQuestion.Id);
@@ -237,6 +244,7 @@ namespace avans_Kwisspel.ViewModel
             if (question.Answers.Count == 4)
             {
                 MessageBox.Show("Aan een vraag kunnen niet meer dan vier antwoorden worden gegeven.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                answerClear();
                 return;
             }
 
@@ -246,7 +254,7 @@ namespace avans_Kwisspel.ViewModel
             }
             if (SelectedAnswer == null)
             {
-                SelectedAnswer = new AnswerVM();
+                answerClear();
             }
             SelectedAnswer.Question = SelectedQuestion.toQuestion();
             SelectedQuestion.Answers.Add(SelectedAnswer.toAnswer());
@@ -254,6 +262,7 @@ namespace avans_Kwisspel.ViewModel
             _databaseContext.Answers.Add(SelectedAnswer.toAnswer());
             _databaseContext.SaveChanges();
             SelectedAnswer = null;
+            doClear();
         }
 
         private void Cancel(Window window)

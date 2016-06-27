@@ -18,10 +18,10 @@
             <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Content="Kwisspel" Foreground="CadetBlue" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="ExtraBold" Grid.ColumnSpan="2"/>
-        <Button Content="Vragen beheer" Grid.Row="2" Grid.Column="0" Width="100" Height="50" VerticalAlignment="Center" Command="{Binding OpenQuestionOverview}"/>
-        <Button Content="Kwis spelen" Grid.Row="1" Width="100" Height="50" HorizontalAlignment="Center" Command="{Binding OpenPlayQuiz}"/>
-        <Button Content="Kwis beheer" Grid.Row="3" Width="100" Height="50" HorizontalAlignment="Center" Command="{Binding OpenQuizOverview}"/>
+        <Label Content="Kwisspel" Foreground="CadetBlue" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" FontWeight="ExtraBold" Grid.ColumnSpan="2"/>
+        <Button Content="Vragen beheer" Grid.Row="2" Grid.Column="0" Width="150" Height="50" VerticalAlignment="Center" Command="{Binding OpenQuestionOverview}"/>
+        <Button Content="Kwis spelen" Grid.Row="1" Width="150" Height="50" HorizontalAlignment="Center" Command="{Binding OpenPlayQuiz}"/>
+        <Button Content="Kwis beheer" Grid.Row="3" Width="150" Height="50" HorizontalAlignment="Center" Command="{Binding OpenQuizOverview}"/>
 
     </Grid>
 </Window>

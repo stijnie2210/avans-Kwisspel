@@ -39,6 +39,11 @@ namespace avans_Kwisspel.ViewModel
 
         private void GiveAnswer()
         {
+            if (SelectedAnswer.Text == null)
+            {
+                MessageBox.Show("vul een antwoord in!", "waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             if (SelectedAnswer != null)
             {
                 if (SelectedAnswer.isCorrect) correctQuestions++;                
@@ -167,7 +172,7 @@ namespace avans_Kwisspel.ViewModel
             if (SelectedQuestion != null)
             {
                 Answers = new ObservableCollection<AnswerVM>(SelectedQuestion.Answers.ToList().Select(answer => new AnswerVM(answer)));
-                SelectedAnswer = Answers.FirstOrDefault();
+                SelectedAnswer = new AnswerVM();
             }
         }
     }
